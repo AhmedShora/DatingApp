@@ -45,6 +45,7 @@ namespace DatingApp.Api.Controllers
             };
             var createdUse = await _auth.Register(userToCreate, userForRegisterDto.Password);
 
+
             return StatusCode(201);
 
         }
@@ -52,6 +53,7 @@ namespace DatingApp.Api.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto) 
         {
+           // throw new Exception("Exception Test");
             var userFromAuth = await _auth.Login(userForLoginDto.UserName.ToLower(), userForLoginDto.Password);
             if (userFromAuth == null)
                 return Unauthorized();
