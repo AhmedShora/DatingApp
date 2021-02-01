@@ -3,25 +3,29 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { AlertModule } from 'ngx-bootstrap/alert';
-
-import { AppComponent } from './app.component';
-import { NavComponent } from './nav/nav.component';
-
 
 import { AuthService } from './_services/Auth.service';
+import { AppComponent } from './app.component';
+import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { ListsComponent } from './lists/lists.component';
+import { MessagesComponent } from './messages/messages.component';
+import { MatchesListComponent } from './matches-list/matches-list.component';
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
-      NavComponent,
-      HomeComponent,
-      RegisterComponent
-   ],
+    NavComponent,
+    HomeComponent,
+    RegisterComponent,
+    ListsComponent,
+    MessagesComponent,
+    MatchesListComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,7 +33,6 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
-    AlertModule.forRoot()
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

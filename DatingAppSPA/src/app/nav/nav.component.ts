@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../_services/Auth.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class NavComponent implements OnInit {
 
   model:any={};
   name:string;
-  constructor(private authService:AuthService) { }
+  constructor(private authService:AuthService,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -20,11 +21,16 @@ export class NavComponent implements OnInit {
       console.log("Login Successed")
     },error =>{
       console.log("Faild To Login")
+    },
+    ()=>{
+      this.router.navigate(['/matches']);
     });
   }
 
   Logout(){
     localStorage.removeItem('token');
+    this.router.navigate(['/home']);
+
   }
 
   LoggedIn(){
