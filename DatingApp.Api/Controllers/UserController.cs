@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DatingApp.Api.Data;
+using Microsoft.AspNetCore.Authorization;
 using DatingApp.Api.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace DatingApp.Api.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class UserController : ControllerBase
     {
