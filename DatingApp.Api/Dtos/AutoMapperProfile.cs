@@ -21,6 +21,7 @@ namespace DatingApp.Api.Dtos
                 .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.Year * -1 + (DateTime.Now.Year)));
 
             CreateMap<Photo, PhotoForDto>();
+            CreateMap<UserForUpdateDto,User>();
 
 
         }

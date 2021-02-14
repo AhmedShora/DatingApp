@@ -22,10 +22,12 @@ import { MatchesListComponent } from './members/matches-list/matches-list.compon
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { MemberDetailsComponent } from './members/member-details/member-details.component';
 import { NgxGalleryModule } from 'ngx-gallery-9';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
+
 export class CustomHammerConfig extends HammerGestureConfig {
   overrides = {
     pinch: { enable: false },
@@ -44,6 +46,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     MatchesListComponent,
     MemberCardComponent,
     MemberDetailsComponent,
+    MemberEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,12 @@ export class CustomHammerConfig extends HammerGestureConfig {
       }
     })
   ],
-  providers: [AuthService, UserService, { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }],
+  providers: [
+    AuthService,
+    UserService,
+    { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig },
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
