@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 import { AuthService } from '../_services/Auth.service';
 
 @Component({
@@ -11,16 +12,19 @@ export class NavComponent implements OnInit {
 
   model:any={};
   name:string;
-  constructor(private authService:AuthService,private router:Router) { }
+  constructor(private authService:AuthService,private router:Router,private notifier:NotifierService) { }
 
   ngOnInit(): void {
   }
 
   Login(){
     this.authService.Login(this.model).subscribe(next => {
-      console.log("Login Successed")
+      console.log("Login Successed");
+      this.notifier.notify('success',"Login Successed!");
     },error =>{
-      console.log("Faild To Login")
+      //console.log("Faild To Login");
+      this.notifier.notify('error',"Error Login!");
+
     },
     ()=>{
       this.router.navigate(['/matches']);
@@ -29,8 +33,8 @@ export class NavComponent implements OnInit {
 
   Logout(){
     localStorage.removeItem('token');
-    this.router.navigate(['/home']);
-
+    this.router.navigate(['']);
+    this.notifier.notify('info',"Logged Out Successed!");
   }
 
   LoggedIn(){

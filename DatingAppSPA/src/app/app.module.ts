@@ -23,7 +23,48 @@ import { MemberCardComponent } from './members/member-card/member-card.component
 import { MemberDetailsComponent } from './members/member-details/member-details.component';
 import { NgxGalleryModule } from 'ngx-gallery-9';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { NotifierModule, NotifierOptions } from 'angular-notifier';
 
+const customNotifierOptions: NotifierOptions = {
+  position: {
+    horizontal: {
+      position: "right",
+      distance: 12
+    },
+    vertical: {
+      position: "bottom",
+      distance: 12,
+      gap: 10
+    }
+  },
+  theme: "material",
+  behaviour: {
+    autoHide: 3000,
+    onClick: "hide",
+    onMouseover: "pauseAutoHide",
+    showDismissButton: true,
+    stacking: 4
+  },
+  animations: {
+    enabled: true,
+    show: {
+      preset: "slide",
+      speed: 300,
+      easing: "ease"
+    },
+    hide: {
+      preset: "fade",
+      speed: 300,
+      easing: "ease",
+      offset: 50
+    },
+    shift: {
+      speed: 300,
+      easing: "ease"
+    },
+    overlap: 150
+  }
+};
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
@@ -64,7 +105,8 @@ export class CustomHammerConfig extends HammerGestureConfig {
         disallowedRoutes: ["localhost:5000/api/auth"]
 
       }
-    })
+    }),
+    NotifierModule.withConfig(customNotifierOptions),
   ],
   providers: [
     AuthService,

@@ -13,11 +13,11 @@
             </li>
         </ul>
         
-        <div  *ngIf="LoggedIn()" dropdown  class="dropdown">
+        <div  *ngIf="LoggedIn()" dropdown  class="dropdown mr-5">
             <a href="#" class="dropdown-toggle text-light" dropdownToggle (click)="false">
                 Hello {{name | titlecase}}
             </a>
-            <div class="dropdown-menu mt-3" *dropdownMenu >
+            <div class="dropdown-menu mt-3 " *dropdownMenu >
                 <a class="dropdown-item" [routerLink]="['/member/edit']"  ><i class="fa fa-user"></i> Edit</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" (click)='Logout()'><i class="fa fa-sign-out"></i> Logout</a>
