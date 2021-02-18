@@ -12,8 +12,11 @@
                 <a class="nav-link" [routerLink]="['/messages']">Messages</a>
             </li>
         </ul>
-        
+
         <div  *ngIf="LoggedIn()" dropdown  class="dropdown mr-5">
+          <span>
+            <img class="navPhoto mr-1" src="{{photoUrl}}" alt="">
+          </span>
             <a href="#" class="dropdown-toggle text-light" dropdownToggle (click)="false">
                 Hello {{name | titlecase}}
             </a>
@@ -30,7 +33,7 @@
             <button [disabled]="!loginForm.valid" class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
         </form>
     </div>
-    
+
 </nav>
 
 <!-- <alert class="fixed-bottom d-flex flex-row-reverse" style="width: 200px;" *ngIf="LoggedIn()"  type="danger" dismissOnTimeout='2000' > Error</alert> -->

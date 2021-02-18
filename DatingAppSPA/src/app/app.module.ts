@@ -24,6 +24,8 @@ import { MemberDetailsComponent } from './members/member-details/member-details.
 import { NgxGalleryModule } from 'ngx-gallery-9';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -88,6 +90,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     MemberCardComponent,
     MemberDetailsComponent,
     MemberEditComponent,
+    PhotoEditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -107,6 +110,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
       }
     }),
     NotifierModule.withConfig(customNotifierOptions),
+    FileUploadModule
   ],
   providers: [
     AuthService,

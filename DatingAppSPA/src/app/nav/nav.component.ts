@@ -12,9 +12,11 @@ export class NavComponent implements OnInit {
 
   model:any={};
   name:string;
+  photoUrl:string;
   constructor(private authService:AuthService,private router:Router,private notifier:NotifierService) { }
 
   ngOnInit(): void {
+    this.authService.currentPhotoUrl.subscribe(photoUrl=>this.photoUrl=photoUrl);
   }
 
   Login(){
@@ -33,6 +35,10 @@ export class NavComponent implements OnInit {
 
   Logout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.authService.decodedToken=null;
+    this.authService.currentUser=null;
+
     this.router.navigate(['']);
     this.notifier.notify('info',"Logged Out Successed!");
   }
@@ -41,7 +47,7 @@ export class NavComponent implements OnInit {
     if(localStorage.getItem('token')){
       this.name = this.authService.helper.decodeToken(localStorage.getItem('token')).unique_name;
     }
-    return this.authService.LoggedIn();  
+    return this.authService.LoggedIn();
   }
 
 }

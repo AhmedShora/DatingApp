@@ -14,14 +14,17 @@ namespace DatingApp.Api.Dtos
             CreateMap<User, UserForListDto>()
                 .ForMember(dest => dest.PhotoUrl, opt =>
                     opt.MapFrom(src => src.Photos.First(a => a.IsMain).Url))
-                .ForMember(dest=>dest.Age,opt=>opt.MapFrom(src=>src.DateOfBirth.Year*-1+(DateTime.Now.Year)));
+                .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.Year * -1 + (DateTime.Now.Year)));
 
             CreateMap<User, UserForDetailsDto>().ForMember(dest => dest.PhotoUrl, opt =>
                 opt.MapFrom(src => src.Photos.First(a => a.IsMain).Url))
                 .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.Year * -1 + (DateTime.Now.Year)));
 
             CreateMap<Photo, PhotoForDto>();
-            CreateMap<UserForUpdateDto,User>();
+            CreateMap<UserForUpdateDto, User>();
+            CreateMap<Photo, PhotoForReturnDto>();
+            CreateMap<PhotoForCreationDto, Photo>();
+
 
 
         }

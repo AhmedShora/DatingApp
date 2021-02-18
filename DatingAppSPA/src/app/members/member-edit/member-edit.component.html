@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-sm-4">
             <div class="card">
-                <img src="{{user.photoUrl}}" alt="{{user.knownAs}}" class="card-img-top img-thumbnail">
+                <img src="{{photoUrl}}" alt="{{user.knownAs}}" class="card-img-top img-thumbnail">
                 <div class="card-body">
                     <div>
                         <strong>Location:</strong>
@@ -30,16 +30,16 @@
                 <div class="card-footer">
                     <div class="d-flex">
                         <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-danger btn-block">Save</button>
-                       
+
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
-            <div class="tab-panel">
-                <tabset [justified]="true">
+        <div class="col-sm-8" >
+            <div class="tab-panel" >
+                <tabset [justified]="true" >
                     <tab heading="Edit Profile">
-                        <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()" > 
+                        <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()" >
                             <h4>Description</h4>
                             <textarea name="introduction" rows="6" class="form-control"
                                 [(ngModel)]="user.introduction"></textarea>
@@ -58,8 +58,8 @@
                             </div>
                         </form>
                     </tab>
-                    <tab heading="Edit Photo">
-                        <h1>Edit Photo here</h1>
+                    <tab heading="Edit Photo" >
+                        <app-photo-editor [photos]="user.photos" (mainPhotoChangedUrl)="updateMainPhoto($event)"></app-photo-editor>
                     </tab>
 
                 </tabset>
