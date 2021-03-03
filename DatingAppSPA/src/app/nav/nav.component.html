@@ -15,7 +15,7 @@
 
         <div  *ngIf="LoggedIn()" dropdown  class="dropdown mr-5">
           <span>
-            <img class="navPhoto mr-1" src="{{photoUrl}}" alt="">
+            <img class="navPhoto mr-1" src="{{photoUrl||'../../../assets/user.png'}}" alt="">
           </span>
             <a href="#" class="dropdown-toggle text-light" dropdownToggle (click)="false">
                 Hello {{name | titlecase}}
