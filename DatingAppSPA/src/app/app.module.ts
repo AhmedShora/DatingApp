@@ -9,6 +9,9 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+
 
 import { AuthService } from './_services/Auth.service';
 import { UserService } from './_services/user.service';
@@ -27,6 +30,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { TimeagoModule } from 'ngx-timeago';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -92,6 +96,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     MemberDetailsComponent,
     MemberEditComponent,
     PhotoEditorComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -100,9 +105,12 @@ export class CustomHammerConfig extends HammerGestureConfig {
     FormsModule,
     ReactiveFormsModule,
 
+    TimeagoModule.forRoot(),
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
+    PaginationModule.forRoot(),
+    ButtonsModule.forRoot(),
 
     NgxGalleryModule,
     TabsModule.forRoot(),
