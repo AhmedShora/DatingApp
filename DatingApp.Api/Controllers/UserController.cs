@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using DatingApp.Api.Helpers;
+using DatingApp.Api.Models;
 
 namespace DatingApp.Api.Controllers
 {
@@ -65,5 +66,28 @@ namespace DatingApp.Api.Controllers
             throw new Exception($"Updating User With {id} faild");
         }
 
+        [HttpPost("{id}/like/{recipientId}")]
+        public async Task<IActionResult> LikeUser(int id, int recipientId)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            var like = await _repo.GetLike(id, recipientId);
+            if (like != null)
+                return BadRequest("You already like this user");
+            if (await _repo.GetUser(recipientId) == null)
+                return NotFound();
+
+            like = new Like
+            {
+                LikerId = id,
+                LikeeId = recipientId
+            };
+            _repo.Add<Like>(like);
+            if (await _repo.SaveAll())
+            {
+                return Ok();
+            }
+            return BadRequest("Faild to Like User");
+        }
     }
 }
