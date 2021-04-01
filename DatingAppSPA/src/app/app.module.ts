@@ -31,6 +31,7 @@ import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeagoModule } from 'ngx-timeago';
+import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -96,6 +97,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     MemberDetailsComponent,
     MemberEditComponent,
     PhotoEditorComponent,
+    MemberMessagesComponent,
 
   ],
   imports: [

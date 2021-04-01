@@ -24,14 +24,14 @@
                 <div class="card-footer">
                     <div class="btn-group d-flex">
                         <button class="btn btn-primary w-100">Like</button>
-                        <button class="btn btn-success w-100">Message</button>
+                        <button class="btn btn-success w-100" (click)="selectTab(2)">Message</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-sm-8">
             <div class="tab-panel">
-                <tabset [justified]="true">
+                <tabset [justified]="true" #memberTabs>
                     <tab heading="About {{user.knownAs}}">
                         <h4>Description</h4>
                         <p>{{user.introduction}}</p>
@@ -43,7 +43,7 @@
                         <p>{{user.interests}}</p>
                     </tab>
                     <tab heading="Messages">
-                        <h4>messages</h4>
+                        <app-member-messages [recipientId]="user.id"></app-member-messages>
                     </tab>
                     <tab heading="Photos">
                         <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>

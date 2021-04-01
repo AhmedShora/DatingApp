@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { error } from 'selenium-webdriver';
 import { User } from 'src/app/_models/user';
@@ -12,10 +13,12 @@ import { UserService } from 'src/app/_services/user.service';
 })
 export class MemberCardComponent implements OnInit {
   @Input() user:User;
+  //queryParams=0;
   constructor(private authService:AuthService,private userService:UserService,
     private notifier:NotifierService) { }
-
+    
   ngOnInit(): void {
+    
   }
 
   sendLike(id:number){

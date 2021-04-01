@@ -12,6 +12,7 @@ import { ListsResolver } from './_resolvers/lists.resolver';
 import { MemberDetailsResolver } from './_resolvers/member-details.resolver';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
+import { MessagesResolver } from './_resolvers/messages.resolver';
 
 const routes: Routes = [
 
@@ -26,7 +27,7 @@ const routes: Routes = [
       { path: 'matches/:id', component: MemberDetailsComponent, resolve: { user: MemberDetailsResolver } },
       { path: 'member/edit', component: MemberEditComponent, resolve: { user: MemberEditResolver }, canDeactivate: [PreventUnsavedChanges] },
       { path: 'lists', component: ListsComponent,resolve:{users:ListsResolver} },
-      { path: 'messages', component: MessagesComponent },
+      { path: 'messages', component: MessagesComponent,resolve:{messages:MessagesResolver} },
     ]
   },
   //{path:'matches',component:MatchesListComponent,canActivate:[AuthGuard]},
