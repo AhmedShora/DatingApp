@@ -38,7 +38,10 @@ namespace DatingApp.Api
             //bind props in cloudinarysettings in helpers to props in app settings
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            {
+                options.UseLazyLoadingProxies();
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
             services.AddAutoMapper(typeof(DatingRepository).Assembly);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(opt =>
             {
@@ -77,7 +80,7 @@ namespace DatingApp.Api
                     var error = context.Features.Get<IExceptionHandlerFeature>();
                     if (error != null)
                     {
-                        context.Response.Headers.Add("Application-Error",error.Error.Message);
+                        context.Response.Headers.Add("Application-Error", error.Error.Message);
                         context.Response.Headers.Add("Access-Control-Expose-Headers", "Application-Error");
                         context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
                         await context.Response.WriteAsync(error.Error.Message);
@@ -88,8 +91,16 @@ namespace DatingApp.Api
 
             //// app.UseHttpsRedirection();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseAuthentication();
-            app.UseMvc();
+            app.UseMvc(route =>
+            {
+                route.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                    defaults: new { controller = "Fallback", action = "Index" }
+                );
+            });
         }
     }
 }
