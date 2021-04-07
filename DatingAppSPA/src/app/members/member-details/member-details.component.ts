@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery-9';
 import { error } from 'protractor';
 import { User } from 'src/app/_models/user';
+import { AuthService } from 'src/app/_services/Auth.service';
 import { UserService } from 'src/app/_services/user.service';
 
 @Component({
@@ -17,7 +19,8 @@ export class MemberDetailsComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,private userService:UserService,
+    private authService:AuthService,private notifier:NotifierService) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
@@ -56,6 +59,16 @@ export class MemberDetailsComponent implements OnInit {
 
   selectTab(tabId: number) {
     this.memberTabs.tabs[tabId].active = true;
+  }
+
+  sendLike(id:number){
+    this.userService.sendLike(this.authService.decodeToken().nameid,id).subscribe(data=>{
+      this.notifier.notify("success","You Liked "+this.user.knownAs);
+    },
+    error=>{
+      this.notifier.notify("error","You Liked "+this.user.knownAs+" before");
+
+    });
   }
 
   //we use resolve to be a data provider so we dont need to add ? in HTML for a component

@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+//import { RouterLink } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
-import { error } from 'selenium-webdriver';
 import { User } from 'src/app/_models/user';
 import { AuthService } from 'src/app/_services/Auth.service';
 import { UserService } from 'src/app/_services/user.service';
