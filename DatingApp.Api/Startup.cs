@@ -77,6 +77,8 @@ namespace DatingApp.Api
                     var error = context.Features.Get<IExceptionHandlerFeature>();
                     if (error != null)
                     {
+                        context.Response.Headers.Add("Application-Error",error.Error.Message);
+                        context.Response.Headers.Add("Access-Control-Expose-Headers", "Application-Error");
                         context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
                         await context.Response.WriteAsync(error.Error.Message);
                     }

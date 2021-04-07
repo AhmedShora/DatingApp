@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
         this.notifier.notify('success', "Register Successed!");
       }, error => {
         console.log(error);
-        this.notifier.notify('error', "error in register!");
+        this.notifier.notify('error', error.error);
       }, () => {
         this.authService.Login(this.user).subscribe(() => {
           this.router.navigate(['/matches']);
