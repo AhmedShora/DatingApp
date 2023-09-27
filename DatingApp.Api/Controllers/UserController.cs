@@ -44,6 +44,7 @@ namespace DatingApp.Api.Controllers
             Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
             return Ok(userToReturn);
         }
+
         [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
@@ -51,6 +52,7 @@ namespace DatingApp.Api.Controllers
             var userToReturn = _mapper.Map<UserForDetailsDto>(user);
             return Ok(userToReturn);
         }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto)
         {

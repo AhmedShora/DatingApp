@@ -46,7 +46,7 @@ namespace DatingApp.Api.Data
 
         public async Task<User> GetUser(int id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(a => a.Id == id);
+            var user = await _context.Users.SingleOrDefaultAsync(a => a.Id == id);
             return user;
         }
 
@@ -111,7 +111,7 @@ namespace DatingApp.Api.Data
 
         public async Task<Message> GetMessage(int id)
         {
-            return await _context.Messages.FirstOrDefaultAsync(m => m.Id == id);
+            return await _context.Messages.SingleOrDefaultAsync(m => m.Id == id);
         }
 
         public async Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams)

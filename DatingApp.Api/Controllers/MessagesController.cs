@@ -26,6 +26,7 @@ namespace DatingApp.Api.Controllers
             _mapper = mapper;
 
         }
+
         [HttpGet("{id}", Name = "GetMessage")]
         public async Task<IActionResult> GetMessage(int userId, int id)
         {
@@ -36,6 +37,7 @@ namespace DatingApp.Api.Controllers
             var message = _mapper.Map<MessageForCreation>(messageFromRepo);
             return Ok(message);
         }
+
         [HttpGet]
         public async Task<IActionResult> GetMessagesForUser(int userId,
         [FromQuery] MessageParams messageParams)
@@ -50,6 +52,7 @@ namespace DatingApp.Api.Controllers
              messagesFromRepo.TotalCount, messagesFromRepo.TotalPages);
             return Ok(messages);
         }
+
         [HttpPost]
         public async Task<IActionResult> CreateMessage(int userId, MessageForCreation messageForCreation)
         {
@@ -66,11 +69,19 @@ namespace DatingApp.Api.Controllers
             var message = _mapper.Map<Message>(messageForCreation);
             _repo.Add(message);
 
+            //await _repo.SaveAll();
+            //var messageToReturn = _mapper.Map<MessageToReturnDto>(message);
+            //return CreatedAtRoute("GetMessage", new { id = message.Id }, messageToReturn);
+
+
             if (await _repo.SaveAll())
             {
+
                 var messageToReturn = _mapper.Map<MessageToReturnDto>(message);
-                return CreatedAtRoute("GetMessage", new { id = message.Id }, messageToReturn);
+                return Ok(messageToReturn);
+                //return CreatedAtRoute("GetMessage", new { id = message.Id }, messageToReturn);
             }
+
             throw new Exception("Creating message faild on save!");
         }
 
@@ -106,6 +117,7 @@ namespace DatingApp.Api.Controllers
 
             throw new Exception("Error deleting the message");
         }
+
         [HttpPost("read/{id}")]
         public async Task<IActionResult> MarkMessageAsRead(int id, int userId)
         {

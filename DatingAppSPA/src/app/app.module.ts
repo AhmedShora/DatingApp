@@ -1,4 +1,8 @@
-import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  HammerGestureConfig,
+  HAMMER_GESTURE_CONFIG,
+} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,7 +15,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-
 
 import { AuthService } from './_services/Auth.service';
 import { UserService } from './_services/user.service';
@@ -36,51 +39,51 @@ import { MemberMessagesComponent } from './members/member-messages/member-messag
 const customNotifierOptions: NotifierOptions = {
   position: {
     horizontal: {
-      position: "right",
-      distance: 12
+      position: 'right',
+      distance: 12,
     },
     vertical: {
-      position: "bottom",
+      position: 'bottom',
       distance: 12,
-      gap: 10
-    }
+      gap: 10,
+    },
   },
-  theme: "material",
+  theme: 'material',
   behaviour: {
     autoHide: 3000,
-    onClick: "hide",
-    onMouseover: "pauseAutoHide",
+    onClick: 'hide',
+    onMouseover: 'pauseAutoHide',
     showDismissButton: true,
-    stacking: 4
+    stacking: 4,
   },
   animations: {
     enabled: true,
     show: {
-      preset: "slide",
+      preset: 'slide',
       speed: 300,
-      easing: "ease"
+      easing: 'ease',
     },
     hide: {
-      preset: "fade",
+      preset: 'fade',
       speed: 300,
-      easing: "ease",
-      offset: 50
+      easing: 'ease',
+      offset: 50,
     },
     shift: {
       speed: 300,
-      easing: "ease"
+      easing: 'ease',
     },
-    overlap: 150
-  }
+    overlap: 150,
+  },
 };
 export function tokenGetter() {
-  return localStorage.getItem("token");
+  return localStorage.getItem('token');
 }
 
 export class CustomHammerConfig extends HammerGestureConfig {
   overrides = {
     pinch: { enable: false },
-    rotate: { enable: false }
+    rotate: { enable: false },
   };
 }
 
@@ -98,7 +101,6 @@ export class CustomHammerConfig extends HammerGestureConfig {
     MemberEditComponent,
     PhotoEditorComponent,
     MemberMessagesComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -119,20 +121,18 @@ export class CustomHammerConfig extends HammerGestureConfig {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:5000"],
-        disallowedRoutes: ["localhost:5000/api/auth"]
-
-      }
+        allowedDomains: ["'https://localhost:5001/api/"],
+        disallowedRoutes: ["'https://localhost:5001/api/auth"],
+      },
     }),
     NotifierModule.withConfig(customNotifierOptions),
-    FileUploadModule
+    FileUploadModule,
   ],
   providers: [
     AuthService,
     UserService,
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig },
-
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-
 namespace DatingApp.Api
 {
     public class Program
@@ -24,14 +23,10 @@ namespace DatingApp.Api
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex,"An Error Accured In DB");
-                   
                 }
-
             }
             host.Run();
-
         }
-
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
